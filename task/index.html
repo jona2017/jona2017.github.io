@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tareas Moderna</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Reloj Digital -->
+    <div class="digital-clock" id="digitalClock">
+        <div class="time-display">
+            <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+        </div>
+        <div class="date-display" id="dateDisplay">
+            Lunes, 1 de Enero
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="app-header">
+            <h1>✨ Mis Tareas</h1>
+            <p>Organiza tu día de manera moderna y eficiente</p>
+        </div>
+        
+        <div class="task-form">
+            <div class="form-group">
+                <input type="text" id="taskInput" placeholder="¿Qué necesitas hacer hoy?" class="task-input">
+                <input type="date" id="dateInput" class="date-input">
+                <button id="addButton" class="add-button">
+                    <span>+</span>
+                    Agregar
+                </button>
+            </div>
+        </div>
+
+        <div class="tasks-container">
+            <div id="tasksList" class="tasks-list"></div>
+            <div id="emptyState" class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h3>No hay tareas aún</h3>
+                <p>Agrega tu primera tarea para comenzar</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="javascript.js"></script>
+    
+    <!-- Estilos para el reloj digital -->
+    <style>
+        .digital-clock {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            min-width: 160px;
+            animation: clockPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes clockPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .time-display {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .time-display span {
+            display: inline-block;
+            min-width: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .time-display #seconds {
+            color: var(--danger-color);
+            font-size: 1.2rem;
+            animation: secondsGlow 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes secondsGlow {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+        
+        .date-display {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            text-transform: capitalize;
+            opacity: 0.8;
+        }
+        
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .digital-clock {
+                bottom: 15px;
+                right: 15px;
+                padding: 0.8rem 1rem;
+                min-width: 140px;
+            }
+            
+            .time-display {
+                font-size: 1.2rem;
+            }
+            
+            .time-display #seconds {
+                font-size: 1rem;
+            }
+            
+            .date-display {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+    
+    <!-- JavaScript para el reloj -->
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Formatear tiempo
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            // Actualizar elementos del reloj
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+            
+            // Formatear fecha
+            const options = { 
+                weekday: 'long', 
+                day: 'numeric', 
+                month: 'long' 
+            };
+            const dateString = now.toLocaleDateString('es-ES', options);
+            document.getElementById('dateDisplay').textContent = dateString;
+        }
+        
+        // Actualizar reloj cada segundo
+        setInterval(updateClock, 1000);
+        
+        // Inicializar reloj inmediatamente
+        updateClock();
+        
+        // Efecto hover para el reloj
+        const clock = document.getElementById('digitalClock');
+        clock.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.boxShadow = '0 12px 40px rgba(0, 0, 0, 0.15)';
+        });
+        
+        clock.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+        });
+    </script>
+</body>
+</html>
