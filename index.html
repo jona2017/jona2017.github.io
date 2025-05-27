@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shoe Luna - Zapatería de Calidad</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-shoe-prints"></i>
+                <h1>Shoe Luna</h1>
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                    <li><a href="#catalogo" class="nav-link">Catálogo</a></li>
+                    <li><a href="#pedidos" class="nav-link">Hacer Pedido</a></li>
+                    <li><a href="#admin" class="nav-link">
+                        Pedidos 
+                        <span id="pedidos-counter" class="counter">0</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Notificación de pedido -->
+    <div id="notification" class="notification hidden">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notification-text">¡Nuevo pedido recibido!</span>
+        </div>
+    </div>
+
+    <!-- Sección Inicio -->
+    <section id="inicio" class="section active">
+        <div class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Bienvenido a Shoe Luna</h2>
+                    <p>Tu zapatería de confianza desde 2020</p>
+                    <button class="btn-primary" onclick="showSection('catalogo')">Ver Catálogo</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-text">
+                        <h3>Sobre Nosotros</h3>
+                        <p>En Shoe Luna nos especializamos en ofrecer calzado de alta calidad para toda la familia. Con más de 4 años de experiencia en el mercado colombiano, nos hemos consolidado como una marca confiable y accesible.</p>
+                        <div class="features">
+                            <div class="feature">
+                                <i class="fas fa-truck"></i>
+                                <span>Envío gratis desde $150.000</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Garantía de 6 meses</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-heart"></i>
+                                <span>Materiales de calidad</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-image">
+                        <i class="fas fa-store store-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Catálogo -->
+    <section id="catalogo" class="section">
+        <div class="container">
+            <h2 class="section-title">Nuestro Catálogo</h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Deportivos Runner Pro</h3>
+                        <p>Zapatos deportivos perfectos para correr y entrenar. Diseño ergonómico y materiales transpirables.</p>
+                        <div class="price">$180.000 COP</div>
+                        <button class="btn-secondary" onclick="selectProduct('Deportivos Runner Pro', 180000)">Seleccionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Formales Executive</h3>
+                        <p>Zapatos formales de cuero genuino para ocasiones especiales y uso empresarial.</p>
+                        <div class="price">$280.000 COP</div>
+                        <button class="btn-secondary" onclick="selectProduct('Formales Executive', 280000)">Seleccionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-walking"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Casuales Comfort</h3>
+                        <p>Zapatos casuales para el día a día. Cómodos y versátiles para cualquier ocasión.</p>
+                        <div class="price">$150.000 COP</div>
+                        <button class="btn-secondary" onclick="selectProduct('Casuales Comfort', 150000)">Seleccionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-female"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Tacones Elegance</h3>
+                        <p>Tacones elegantes para mujeres. Diseño sofisticado y cómodo para eventos especiales.</p>
+                        <div class="price">$220.000 COP</div>
+                        <button class="btn-secondary" onclick="selectProduct('Tacones Elegance', 220000)">Seleccionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Infantiles PlayTime</h3>
+                        <p>Zapatos especialmente diseñados para niños. Seguros, cómodos y resistentes.</p>
+                        <div class="price">$120.000 COP</div>
+                        <button class="btn-secondary" onclick="selectProduct('Infantiles PlayTime', 120000)">Seleccionar</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-hiking"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Botas Adventure</h3>
+                        <p>Botas resistentes para aventuras al aire libre. Impermeables y con suela antideslizante.</p>
+                        <div class="price">$320.000 COP</div>
+                        <button class="btn-secondary" onclick="selectProduct('Botas Adventure', 320000)">Seleccionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Hacer Pedido -->
+    <section id="pedidos" class="section">
+        <div class="container">
+            <h2 class="section-title">Realizar Pedido</h2>
+            <div class="form-container">
+                <form id="pedido-form" class="pedido-form">
+                    <div class="form-group">
+                        <label for="producto">Producto Seleccionado:</label>
+                        <input type="text" id="producto" name="producto" readonly>
+                        <div class="precio-display" id="precio-display"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre Completo:</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="direccion">Dirección de Entrega:</label>
+                        <textarea id="direccion" name="direccion" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="talla">Talla:</label>
+                            <select id="talla" name="talla" required>
+                                <option value="">Seleccionar talla</option>
+                                <option value="35">35</option>
+                                <option value="36">36</option>
+                                <option value="37">37</option>
+                                <option value="38">38</option>
+                                <option value="39">39</option>
+                                <option value="40">40</option>
+                                <option value="41">41</option>
+                                <option value="42">42</option>
+                                <option value="43">43</option>
+                                <option value="44">44</option>
+                                <option value="45">45</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad:</label>
+                            <input type="number" id="cantidad" name="cantidad" min="1" max="10" value="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comentarios">Comentarios Adicionales:</label>
+                        <textarea id="comentarios" name="comentarios" rows="3" placeholder="Algún comentario especial sobre tu pedido..."></textarea>
+                    </div>
+
+                    <div class="total-section">
+                        <div class="total-display">
+                            <span>Total a Pagar: </span>
+                            <span id="total-precio">$0 COP</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Realizar Pedido</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Admin -->
+    <section id="admin" class="section">
+        <div class="container">
+            <h2 class="section-title">Panel de Pedidos</h2>
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-pedidos">0</div>
+                    <div class="stat-label">Total Pedidos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="total-ventas">$0</div>
+                    <div class="stat-label">Total Ventas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="pedidos-hoy">0</div>
+                    <div class="stat-label">Pedidos Hoy</div>
+                </div>
+            </div>
+            
+            <div class="pedidos-list">
+                <div class="list-header">
+                    <h3>Lista de Pedidos</h3>
+                    <button class="btn-secondary" onclick="exportarPedidos()">Exportar</button>
+                </div>
+                <div id="pedidos-container">
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No hay pedidos registrados aún</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="javascript.js"></script>
+</body>
+</html>
