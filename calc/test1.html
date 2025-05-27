@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora Moderna</title>
+  <style>
+    body {
+      background: #1e1e2f;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .calculadora {
+      background: #2e2e3a;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      width: 300px;
+    }
+
+    .pantalla {
+      background: #111;
+      color: #0f0;
+      font-size: 2em;
+      text-align: right;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      min-height: 50px;
+      overflow-x: auto;
+    }
+
+    .botones {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 20px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 10px;
+      background: #444;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #666;
+    }
+
+    .igual {
+      background: #0a84ff;
+      color: white;
+    }
+
+    .operador {
+      background: #ff6a00;
+      color: white;
+    }
+
+    .limpiar {
+      background: #ff3b30;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculadora">
+    <div id="pantalla" class="pantalla">0</div>
+    <div class="botones">
+      <button onclick="agregarNumero('7')">7</button>
+      <button onclick="agregarNumero('8')">8</button>
+      <button onclick="agregarNumero('9')">9</button>
+      <button class="operador" onclick="operar('dividir')">÷</button>
+
+      <button onclick="agregarNumero('4')">4</button>
+      <button onclick="agregarNumero('5')">5</button>
+      <button onclick="agregarNumero('6')">6</button>
+      <button class="operador" onclick="operar('multiplicar')">×</button>
+
+      <button onclick="agregarNumero('1')">1</button>
+      <button onclick="agregarNumero('2')">2</button>
+      <button onclick="agregarNumero('3')">3</button>
+      <button class="operador" onclick="operar('restar')">−</button>
+
+      <button onclick="agregarNumero('0')">0</button>
+      <button onclick="agregarNumero('.')">.</button>
+      <button class="igual" onclick="calcular()">=</button>
+      <button class="operador" onclick="operar('sumar')">+</button>
+
+      <button class="limpiar" onclick="limpiar()">C</button>
+    </div>
+  </div>
+
+  <script>
+    let operando1 = '';
+    let operando2 = '';
+    let operacion = '';
+    let escribiendoSegundo = false;
+
+    function actualizarPantalla(valor) {
+      const pantalla = document.getElementById('pantalla');
+      pantalla.textContent = valor;
+    }
+
+    function agregarNumero(numero) {
+      if (!escribiendoSegundo) {
+        operando1 += numero;
+        actualizarPantalla(operando1);
+      } else {
+        operando2 += numero;
+        actualizarPantalla(operando1 + simboloOperacion(operacion) + operando2);
+      }
+    }
+
+    function operar(tipoOperacion) {
+      if (operando1 === '') return;
+      operacion = tipoOperacion;
+      escribiendoSegundo = true;
+      actualizarPantalla(operando1 + simboloOperacion(operacion));
+    }
+
+    function simboloOperacion(op) {
+      switch(op) {
+        case 'sumar': return '+';
+        case 'restar': return '-';
+        case 'multiplicar': return '×';
+        case 'dividir': return '÷';
+        default: return '';
+      }
+    }
+
+    function calcular() {
+      const num1 = parseFloat(operando1);
+      const num2 = parseFloat(operando2);
+      let resultado;
+
+      switch(operacion) {
+        case 'sumar':
+          resultado = sumar(num1, num2);
+          break;
+        case 'restar':
+          resultado = restar(num1, num2);
+          break;
+        case 'multiplicar':
+          resultado = multiplicar(num1, num2);
+          break;
+        case 'dividir':
+          resultado = dividir(num1, num2);
+          break;
+        default:
+          return;
+      }
+
+      actualizarPantalla(resultado);
+      // Reiniciar
+      operando1 = resultado.toString();
+      operando2 = '';
+      escribiendoSegundo = false;
+    }
+
+    function limpiar() {
+      operando1 = '';
+      operando2 = '';
+      operacion = '';
+      escribiendoSegundo = false;
+      actualizarPantalla('0');
+    }
+
+    // FUNCIONES DE OPERACIÓN
+    function sumar(a, b) {
+      return a + b;
+    }
+
+    function restar(a, b) {
+      return a - b;
+    }
+
+    function multiplicar(a, b) {
+      return a * b;
+    }
+
+    function dividir(a, b) {
+      return b !== 0 ? a / b : 'Error';
+    }
+  </script>
+</body>
+</html>
